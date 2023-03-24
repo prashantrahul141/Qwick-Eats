@@ -10,4 +10,8 @@
   .btn-secondary {
     @apply border-muted bg-main text-bord hover:border-black hover:text-black dark:bg-black dark:text-main;
   }
+
+  .btn-signin {
+    @apply hover:text-main dark:text-main;
+  }
 }
