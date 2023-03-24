@@ -4,10 +4,10 @@
 
 @layer components {
   .btn {
-    @apply h-11 w-full rounded-md border border-main bg-main text-black duration-200 ease-in-out hover:bg-black hover:text-main;
+    @apply h-11 w-full rounded-md border border-main  bg-bg text-white duration-200 ease-in-out hover:border-black hover:bg-main hover:text-black dark:bg-main dark:text-black dark:hover:border-white dark:hover:bg-black dark:hover:text-main;
   }
 
   .btn-secondary {
-    @apply border-bord bg-black text-muted hover:border-main;
+    @apply border-muted bg-main text-bord hover:border-black hover:text-black dark:bg-black dark:text-main;
   }
 }
