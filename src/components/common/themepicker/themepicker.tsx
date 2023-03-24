@@ -1,3 +1,4 @@
+import { getCurrentThemeMode } from '@src/utils/clientSideUtilFunctions';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -6,18 +7,12 @@ import { BsSunFill, BsFillMoonFill } from 'react-icons/bs';
 const ThemePicker: FC = () => {
   const [currentTheme, setCurrentTheme] = useState<'DARK' | 'LIGHT'>('DARK');
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-        setCurrentTheme('DARK');
-      } else {
-        document.documentElement.classList.remove('dark');
-        setCurrentTheme('LIGHT');
-      }
+    if (getCurrentThemeMode() === 'dark') {
+      document.documentElement.classList.add('dark');
+      setCurrentTheme('DARK');
+    } else {
+      document.documentElement.classList.remove('dark');
+      setCurrentTheme('LIGHT');
     }
   }, []);
 
