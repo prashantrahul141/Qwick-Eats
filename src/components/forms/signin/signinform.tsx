@@ -14,7 +14,7 @@ const SignInForm: FC = () => {
           }}>
           <span className='flex items-center justify-center gap-2'>
             <AiFillGithub size={24}></AiFillGithub>
-            <span className=''>Github</span>
+            <span className=''>Continue with Github</span>
           </span>
         </button>
         <button
@@ -24,7 +24,7 @@ const SignInForm: FC = () => {
           }}>
           <span className='flex  items-center justify-center gap-2'>
             <BsDiscord size={24}></BsDiscord>
-            <span className=''>Discord</span>
+            <span className=''>Continue with Discord</span>
           </span>
         </button>
         <button
@@ -34,7 +34,7 @@ const SignInForm: FC = () => {
           }}>
           <span className='flex  items-center justify-center gap-2'>
             <AiFillGoogleCircle size={24}></AiFillGoogleCircle>
-            <span className=''>Google</span>
+            <span className=''>Continue with Google</span>
           </span>
         </button>
       </main>

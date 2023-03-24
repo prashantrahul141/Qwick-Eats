@@ -21,7 +21,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <div className='h-screen bg-main dark:bg-bg'>
+      <div className='h-screen bg-bg-white dark:bg-bg'>
         <Component {...pageProps} />
       </div>
     </SessionProvider>
