@@ -10,9 +10,23 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  if (typeof window !== 'undefined') {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <div className='bg-main dark:bg-bg'>
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   );
 };
