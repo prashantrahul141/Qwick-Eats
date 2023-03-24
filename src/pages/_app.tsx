@@ -5,17 +5,14 @@ import { SessionProvider } from 'next-auth/react';
 import { api } from '@utils/api';
 
 import '@styles/globals.css';
+import { getCurrentThemeMode } from '@src/utils/clientSideUtilFunctions';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   if (typeof window !== 'undefined') {
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
+    if (getCurrentThemeMode() === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -24,7 +21,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <div className='bg-main dark:bg-bg'>
+      <div className='h-screen bg-main dark:bg-bg'>
         <Component {...pageProps} />
       </div>
     </SessionProvider>
