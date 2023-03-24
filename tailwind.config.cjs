@@ -7,12 +7,12 @@ const config = {
   theme: {
     extend: {
       colors: {
-        bg: '#121313',
-        bord: '#192a2a',
-        'bord-act': '#f0f0f0',
-        main: '#f0f0f0',
-        muted: 'rgb(147,154,154)',
-        disabled: '#1c1d1d',
+        bg: 'hsla(180, 3%, 7%, 1)',
+        bord: 'hsla(180, 2%, 13%, 1)',
+        'bord-act': 'hsla(0, 0%, 94%, 1)',
+        main: 'hsla(0, 0%, 94%, 1)',
+        muted: 'hsla(180, 3%, 59%, 1)',
+        disabled: 'hsla(180, 2%, 11%, 1)',
       },
     },
   },
