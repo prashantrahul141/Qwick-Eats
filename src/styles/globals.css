@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
   .btn {
-    @apply h-11 w-full rounded-md border border-main  bg-bg text-white duration-200 ease-in-out hover:border-black hover:bg-main hover:text-black dark:bg-main dark:text-black dark:hover:border-white dark:hover:bg-black dark:hover:text-main;
+    @apply h-11 w-full select-none rounded-md border border-main  bg-bg text-white duration-200 ease-in-out hover:border-black hover:bg-main hover:text-black dark:bg-main dark:text-black dark:hover:border-white dark:hover:bg-black dark:hover:text-main;
   }
 
   .btn-secondary {

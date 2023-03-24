@@ -7,8 +7,10 @@ const config = {
   },
   theme: {
     extend: {
+      fontFamily: { poppins: 'Poppins' },
       colors: {
         bg: 'hsla(180, 3%, 7%, 1)',
+        'bg-white': 'hsla(0, 0%, 99%, 1)',
         bord: 'hsla(180, 2%, 13%, 1)',
         'bord-act': 'hsla(0, 0%, 94%, 1)',
         main: 'hsla(0, 0%, 94%, 1)',
