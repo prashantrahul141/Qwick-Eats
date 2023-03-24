@@ -41,14 +41,14 @@ export const authOptions: NextAuthOptions = {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
-        // session.user.role = user.role; <-- put other properties on the session here
+        session.user.role = user.role;
       }
       return session;
     },
   },
   adapter: PrismaAdapter(prisma),
   secret: env.NEXTAUTH_SECRET,
-  pages: { newUser: '/signin/new', signIn: '/home', signOut: '/' },
+  pages: { newUser: '/signin/new', signIn: '/', signOut: '/' },
   providers: [
     DiscordProvider({
       clientId: env.TOKEN_DISCORD_CLIENT_ID,
