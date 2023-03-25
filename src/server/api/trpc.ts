@@ -119,6 +119,23 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   });
 });
 
+/** Resusable middleware that tests if the user is customer type or not. */
+const enforceUserIsCustomer = t.middleware(({ ctx, next }) => {
+  if (
+    !ctx.session ||
+    !ctx.session.user ||
+    !ctx.session.user.role ||
+    ctx.session.user.role !== 'CUSTOMER'
+  ) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+
 /**
  * Protected (authenticated) procedure
  *
@@ -128,3 +145,8 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+
+/** enforces the user to be logged in and be a customer type. */
+export const protectedCustomerProcedure = t.procedure.use(
+  enforceUserIsCustomer
+);
