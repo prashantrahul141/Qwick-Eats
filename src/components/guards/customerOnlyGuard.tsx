@@ -8,11 +8,7 @@ const CustomerOnlyGuard: FC<{ children: ReactNode }> = ({ children }) => {
   const router = useRouter();
 
   if (status === 'loading') {
-    return (
-      <div className='h-full w-full'>
-        <LoadingSpinner></LoadingSpinner>
-      </div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (status === 'unauthenticated') {
@@ -34,11 +30,7 @@ const CustomerOnlyGuard: FC<{ children: ReactNode }> = ({ children }) => {
 
     return <>{children}</>;
   }
-  return (
-    <div className='h-full w-full'>
-      <LoadingSpinner></LoadingSpinner>
-    </div>
-  );
+  return <LoadingSpinner></LoadingSpinner>;
 };
 
 export default CustomerOnlyGuard;
