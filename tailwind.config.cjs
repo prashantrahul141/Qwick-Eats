@@ -5,8 +5,12 @@ const config = {
   future: {
     hoverOnlyWhenSupported: true,
   },
+
   theme: {
     extend: {
+      animation: {
+        'spin-ease': 'spin .9s ease-in-out infinite',
+      },
       fontFamily: { poppins: 'Poppins' },
       colors: {
         bg: 'hsla(180, 3%, 7%, 1)',
