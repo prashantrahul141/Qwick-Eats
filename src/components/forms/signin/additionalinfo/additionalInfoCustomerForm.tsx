@@ -94,6 +94,7 @@ const AdditionalInfoCustomerForm: FC = () => {
       </fieldset>
       <div className='relative w-full'>
         <button
+          disabled={accountSetupMutation.isLoading}
           type='submit'
           className='btn absolute right-1 w-fit py-[.4rem] px-2'>
           Start Ordering
