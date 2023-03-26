@@ -1,5 +1,5 @@
-import NonLoginTopBar from '@src/components/common/navigationbar/nonlogintopbar';
-import SignInForm from '@src/components/forms/signin/signinform';
+import NonLoginTopBar from '@src/components/common/navigationbar/nonLoginTopBar';
+import SignInForm from '@src/components/forms/signin/signInForm';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 
