@@ -1,12 +1,14 @@
 import InfoHoverIcon from '@src/components/common/infoHoverIcon';
+import { api } from '@src/utils/api';
 import { randomAddress } from '@src/utils/constants';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 type FormInputs = {
   addr: string;
-  phoneNumber: number;
+  phoneNumber: string;
 };
 
 const AdditionalInfoCustomerForm: FC = () => {
@@ -15,9 +17,15 @@ const AdditionalInfoCustomerForm: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({ mode: 'all' });
+  const router = useRouter();
+  const accountSetupMutation = api.accountSetup.setupCustomer.useMutation();
 
-  const submitCustomerForm: SubmitHandler<FormInputs> = (data) => {
-    console.log(data);
+  const submitCustomerForm: SubmitHandler<FormInputs> = async (data) => {
+    await accountSetupMutation.mutateAsync({
+      ...data,
+    });
+
+    void router.push('/order');
   };
 
   return (
