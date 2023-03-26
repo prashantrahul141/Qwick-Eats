@@ -5,6 +5,7 @@ const Icon: FC = () => {
   return (
     <Image
       priority
+      sizes='100px'
       src={'/icons/android-chrome-512x512.png'}
       alt='Icon'
       fill
