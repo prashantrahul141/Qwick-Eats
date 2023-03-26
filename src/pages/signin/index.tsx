@@ -1,9 +1,36 @@
+import LoadingSpinner from '@src/components/common/loadingSpinner';
 import NonLoginTopBar from '@src/components/common/navigationbar/nonLoginTopBar';
 import SignInForm from '@src/components/forms/signin/signInForm';
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const SignIn: NextPage = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  if (status === 'loading') {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+
+  if (status === 'authenticated') {
+    switch (session.user.role) {
+      case 'CUSTOMER':
+        void router.push('/order');
+        break;
+      case 'VENDOR':
+        void router.push('/sell');
+        break;
+      case 'ADMIN':
+        void router.push('/dashboard');
+        break;
+      case 'NOTDEFINED':
+        void router.push('/signin/new');
+        break;
+    }
+  }
+
   return (
     <div className=''>
       <NonLoginTopBar></NonLoginTopBar>
