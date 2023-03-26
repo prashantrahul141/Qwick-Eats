@@ -30,4 +30,38 @@ export const accountSetupRouter = createTRPCRouter({
         });
       }
     }),
+
+  setupVendor: protectedProcedure
+    .input(
+      z.object({
+        companyName: z.string(),
+        addr: z.string(),
+        phoneNumber: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        select: {
+          accountSetupDone: true,
+        },
+      });
+
+      if (user && !user.accountSetupDone) {
+        await prisma.user.update({
+          where: {
+            id: ctx.session.user.id,
+          },
+          data: {
+            companyName: input.companyName,
+            address: input.addr,
+            phoneNumber: input.phoneNumber,
+            role: 'VENDOR',
+            accountSetupDone: true,
+          },
+        });
+      }
+    }),
 });

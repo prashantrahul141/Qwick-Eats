@@ -1,4 +1,6 @@
+import { api } from '@src/utils/api';
 import { randomAddress } from '@src/utils/constants';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -6,7 +8,7 @@ import { useForm } from 'react-hook-form';
 type FormInputs = {
   companyName: string;
   addr: string;
-  phoneNumber: number;
+  phoneNumber: string;
 };
 
 const AdditionalInfoVendorForm: FC = () => {
@@ -16,8 +18,12 @@ const AdditionalInfoVendorForm: FC = () => {
     formState: { errors },
   } = useForm<FormInputs>({ mode: 'all' });
 
-  const submitVendorForm: SubmitHandler<FormInputs> = (data) => {
-    console.log(data);
+  const accountSetupMutation = api.accountSetup.setupVendor.useMutation();
+  const router = useRouter();
+
+  const submitVendorForm: SubmitHandler<FormInputs> = async (data) => {
+    await accountSetupMutation.mutateAsync({ ...data });
+    void router.push('/sell');
   };
 
   return (
