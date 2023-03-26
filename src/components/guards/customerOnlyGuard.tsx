@@ -16,19 +16,21 @@ const CustomerOnlyGuard: FC<{ children: ReactNode }> = ({ children }) => {
   }
 
   if (status === 'authenticated' && session) {
-    if (session.user.role === 'VENDOR') {
-      void router.push('/sell');
-    } else if (session.user.role === 'ADMIN') {
-      void router.push('/dashboard');
-    } else if (session.user.role === 'NOTDEFINED') {
-      void router.push('/signin/new');
+    switch (session.user.role) {
+      case 'VENDOR':
+        void router.push('/sell');
+        break;
+      case 'ADMIN':
+        void router.push('/dashboard');
+        break;
+      case 'NOTDEFINED':
+        void router.push('/signin/new');
+        break;
     }
 
-    if (session.user.role !== 'CUSTOMER') {
-      return <></>;
+    if (session.user.role === 'CUSTOMER') {
+      return <>{children}</>;
     }
-
-    return <>{children}</>;
   }
   return <LoadingSpinner></LoadingSpinner>;
 };
