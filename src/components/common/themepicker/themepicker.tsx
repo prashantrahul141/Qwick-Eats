@@ -21,7 +21,7 @@ const ThemePicker: FC = () => {
       {currentTheme === 'LIGHT' && (
         <button
           title='Theme'
-          className='w-fit p-2 text-black dark:text-main'
+          className='w-fit text-black dark:text-main'
           onClick={() => {
             localStorage.setItem('theme', 'dark');
             document.documentElement.classList.add('dark');
@@ -33,13 +33,13 @@ const ThemePicker: FC = () => {
       {currentTheme === 'DARK' && (
         <button
           title='Theme'
-          className='w-fit p-2 text-black dark:text-main'
+          className='w-fit text-black dark:text-main'
           onClick={() => {
             localStorage.setItem('theme', 'light');
             document.documentElement.classList.remove('dark');
             setCurrentTheme('LIGHT');
           }}>
-          <BsFillMoonFill className='text-2xl sm:text-xl'></BsFillMoonFill>
+          <BsFillMoonFill className='text-2xl sm:text-base'></BsFillMoonFill>
         </button>
       )}
     </>
