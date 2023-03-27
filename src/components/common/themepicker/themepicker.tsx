@@ -27,7 +27,7 @@ const ThemePicker: FC = () => {
             document.documentElement.classList.add('dark');
             setCurrentTheme('DARK');
           }}>
-          <BsSunFill></BsSunFill>
+          <BsSunFill className='text-2xl sm:text-xl'></BsSunFill>
         </button>
       )}
       {currentTheme === 'DARK' && (
@@ -39,7 +39,7 @@ const ThemePicker: FC = () => {
             document.documentElement.classList.remove('dark');
             setCurrentTheme('LIGHT');
           }}>
-          <BsFillMoonFill></BsFillMoonFill>
+          <BsFillMoonFill className='text-2xl sm:text-xl'></BsFillMoonFill>
         </button>
       )}
     </>
