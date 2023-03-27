@@ -1,4 +1,8 @@
-import type { DefinedUserRole, navigationOptions } from '@src/types';
+import type {
+  DefinedUserRole,
+  navigationOptions,
+  tabOptionsNames,
+} from '@src/types';
 import type { FC } from 'react';
 import {
   adminNavigationOptions,
@@ -12,7 +16,10 @@ import ThemePicker from '../themepicker/themepicker';
 import { IoMdClose } from 'react-icons/io';
 import Link from 'next/link';
 
-const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
+const CustomerTopBarMobile: FC<{
+  type: DefinedUserRole;
+  activeTab?: tabOptionsNames;
+}> = ({ type, activeTab = '' }) => {
   const { data: session } = useSession();
   const [showMenu, setShowMenu] = useState(false);
   const userAvatar = session?.user.image || '/defaults/defaultAvatar.png';
@@ -32,7 +39,7 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
 
   return (
     <>
-      <nav className='relative flex h-16 w-full items-center border-b border-b-bord/40 bg-white px-2 dark:bg-black'>
+      <nav className='relative flex h-16 w-full select-none items-center border-b border-b-bord/40 bg-white px-2 dark:bg-black'>
         <Link href={navOptions[0]?.url || '/'} title='Home'>
           <Image
             className={`w-12 rounded-full border-[2px] border-bord/50 dark:border-transparent  ${
@@ -60,7 +67,7 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
           }}></div>
       )}
       {showMenu && (
-        <nav className='absolute top-0 right-0 z-20 h-screen w-10/12 overflow-auto bg-white dark:bg-black'>
+        <nav className='absolute top-0 right-0 z-20 h-screen w-10/12 select-none overflow-auto bg-white dark:bg-black'>
           <div className='absolute h-36 w-full'>
             <Image
               src={session?.user.image || '/defaults/defaultAvatar.png'}
@@ -92,12 +99,18 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
                 <Link
                   href={eachOption.url}
                   title={eachOption.text}
-                  className={`flex items-center justify-start gap-3 border-b border-b-black/40 px-6 py-3 dark:border-b-white/30`}
+                  className={`flex items-center justify-start gap-3 border-b border-b-black/40 px-6 py-3 dark:border-b-white/30 ${
+                    activeTab === eachOption.text ? 'dark:bg-white/[0.15]' : ''
+                  }`}
                   key={index}>
                   <span className='text-2xl text-black dark:text-white'>
-                    {eachOption.iconActive}
+                    {activeTab === eachOption.text && eachOption.iconActive}
+                    {activeTab !== eachOption.text && eachOption.icon}
                   </span>
-                  <span className='text-xl text-black dark:text-white'>
+                  <span
+                    className={`extrabold text-xl text-black dark:text-white ${
+                      activeTab === eachOption.text ? 'font-bold' : ''
+                    }`}>
                     {eachOption.text}
                   </span>
                 </Link>
