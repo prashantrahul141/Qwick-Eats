@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
 import LoadingSpinner from '../common/loadingSpinner';
 
-const CustomerOnlyGuard: FC<{ children: ReactNode }> = ({ children }) => {
+const CustomerOnlyGuard: FC<{ children?: ReactNode }> = ({ children }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
