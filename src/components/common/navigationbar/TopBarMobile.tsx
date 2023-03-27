@@ -14,7 +14,7 @@ import Link from 'next/link';
 
 const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
   const { data: session } = useSession();
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const userAvatar = session?.user.image || '/defaults/defaultAvatar.png';
 
   let navOptions: navigationOptions = [];
@@ -39,6 +39,7 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
           } `}
           src={userAvatar}
           height={100}
+          priority
           width={100}
           alt='Avatar'></Image>
         <button
@@ -51,42 +52,45 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
       </nav>
       {showMenu && (
         <div
-          className='absolute top-0 left-0 z-10 h-screen w-screen bg-black/50 backdrop-blur-sm dark:bg-white/20'
+          className='absolute top-0 left-0 z-10 h-screen w-screen bg-black/50 backdrop-blur-[3px] dark:bg-white/20'
           onClick={() => {
             setShowMenu(false);
           }}></div>
       )}
       {showMenu && (
         <nav className='absolute top-0 right-0 z-20 h-screen w-10/12 overflow-auto bg-white dark:bg-black'>
-          <div className='relative top-4 flex w-full px-4'>
-            <span>
+          <div className='absolute h-36 w-full'>
+            <Image
+              src={session?.user.image || '/defaults/defaultAvatar.png'}
+              priority
+              fill
+              alt='Image'
+              className='object-cover brightness-75'></Image>
+          </div>
+
+          <div className='flex'>
+            <span className='pt-2 pl-2 invert dark:invert-0'>
               <ThemePicker></ThemePicker>
             </span>
-            <span className='flex h-full w-full flex-grow items-center justify-end'>
+            <span className='z-20 flex h-full w-full  flex-grow items-center justify-end pt-2 pr-2'>
               <button onClick={() => setShowMenu(false)}>
-                <IoMdClose className='text-4xl dark:text-main'></IoMdClose>
+                <IoMdClose className='text-4xl text-main'></IoMdClose>
               </button>
             </span>
           </div>
-          <div className='relative mt-8 flex justify-center'>
-            <p className='font-poppins text-lg text-black dark:text-gray-300'>
-              Hi,{' '}
-              <span className='text-2xl text-black dark:text-white '>
-                {session?.user.name}!
-              </span>
+
+          <div className='relative mt-7 flex justify-center'>
+            <p className='font-poppins text-lg text-white'>
+              Hi, <span className='text-2xl'>{session?.user.name}!</span>
             </p>
           </div>
-          <div className='relative mt-8'>
+          <div className='relative mt-9'>
             {navOptions.map((eachOption, index) => {
               return (
                 <Link
                   href={eachOption.url}
                   title={eachOption.text}
-                  className={`flex items-center justify-start gap-3 border-b border-b-black/40 px-6 py-3 dark:border-b-white/30 ${
-                    index === 0
-                      ? 'border-t border-t-black/40 dark:border-t-white/30'
-                      : ''
-                  }`}
+                  className={`flex items-center justify-start gap-3 border-b border-b-black/40 px-6 py-3 dark:border-b-white/30`}
                   key={index}>
                   <span className='text-2xl text-black dark:text-white'>
                     {eachOption.iconActive}
