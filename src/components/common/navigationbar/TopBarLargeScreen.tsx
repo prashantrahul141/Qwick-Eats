@@ -36,7 +36,7 @@ const CustomerTopBarLargeScreen: FC<{
       break;
   }
   return (
-    <nav className='h-26 w-full border-b border-b-black bg-white dark:border-b-bord dark:bg-black'>
+    <nav className='h-26 w-full select-none border-b border-b-black bg-white dark:border-b-bord dark:bg-black'>
       <div className='flex h-16 w-full items-center justify-center px-8'>
         <Link href='/' className='w-fit text-black dark:text-main'>
           <Image
