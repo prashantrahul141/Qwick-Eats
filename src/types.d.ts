@@ -9,3 +9,7 @@ type navigationOptions = Array<{
   iconActive: ReactNode;
   text: string;
 }>;
+
+type tabOptionsNames = 'Home' | 'Orders' | '';
+
+export { DefinedUserRole, navigationOptions, tabOptionsNames };
