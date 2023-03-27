@@ -5,7 +5,7 @@ import {
   customerNavigationOptions,
   vendorNavigationOptions,
 } from '@src/utils/constantJSX';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import ThemePicker from '../themepicker/themepicker';
@@ -14,7 +14,7 @@ import Link from 'next/link';
 
 const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
   const { data: session } = useSession();
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const userAvatar = session?.user.image || '/defaults/defaultAvatar.png';
 
   let navOptions: navigationOptions = [];
@@ -33,15 +33,17 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
   return (
     <>
       <nav className='relative flex h-16 w-full items-center border-b border-b-bord/40 bg-white px-2 dark:bg-black'>
-        <Image
-          className={`w-12 rounded-full border-[2px] border-bord/50 dark:border-transparent  ${
-            userAvatar === '/defaults/defaultAvatar.png' ? 'dark:invert' : ''
-          } `}
-          src={userAvatar}
-          height={100}
-          priority
-          width={100}
-          alt='Avatar'></Image>
+        <Link href={navOptions[0]?.url || '/'} title='Home'>
+          <Image
+            className={`w-12 rounded-full border-[2px] border-bord/50 dark:border-transparent  ${
+              userAvatar === '/defaults/defaultAvatar.png' ? 'dark:invert' : ''
+            } `}
+            src={userAvatar}
+            height={100}
+            priority
+            width={100}
+            alt='Avatar'></Image>
+        </Link>
         <button
           className='rounded-mb absolute right-3 h-12 w-12'
           onClick={() => setShowMenu(true)}>
@@ -95,12 +97,17 @@ const CustomerTopBarMobile: FC<{ type: DefinedUserRole }> = ({ type }) => {
                   <span className='text-2xl text-black dark:text-white'>
                     {eachOption.iconActive}
                   </span>
-                  <span className='text-2xl text-black dark:text-white'>
+                  <span className='text-xl text-black dark:text-white'>
                     {eachOption.text}
                   </span>
                 </Link>
               );
             })}
+          </div>
+          <div className='mt-7 flex justify-center'>
+            <button onClick={() => signOut()} className='btn mx- w-fit px-2'>
+              Sign out
+            </button>
           </div>
         </nav>
       )}
