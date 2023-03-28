@@ -21,8 +21,13 @@ const server = z.object({
   // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
   TOKEN_DISCORD_CLIENT_ID: z.string(),
   TOKEN_DISCORD_CLIENT_SECRET: z.string(),
+
   TOKEN_GITHUB_CLIENT_ID: z.string(),
   TOKEN_GITHUB_CLIENT_SECRET: z.string(),
+
+  TOKEN_CLOUDINARY_CLOUD_NAME: z.string(),
+  TOKEN_CLOUDINARY_API_KEY: z.string(),
+  TOKEN_CLOUDINARY_API_SECRET: z.string(),
 });
 
 /**
@@ -30,7 +35,8 @@ const server = z.object({
  * built with invalid env vars. To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
 const client = z.object({
-  // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_TOKEN_CLOUDINARY_CLOUD_NAME: z.string(),
+  NEXT_PUBLIC_TOKEN_CLOUDINARY_API_KEY: z.string(),
 });
 
 /**
@@ -48,7 +54,13 @@ const processEnv = {
   TOKEN_DISCORD_CLIENT_SECRET: process.env.TOKEN_DISCORD_CLIENT_SECRET,
   TOKEN_GITHUB_CLIENT_ID: process.env.TOKEN_GITHUB_CLIENT_ID,
   TOKEN_GITHUB_CLIENT_SECRET: process.env.TOKEN_GITHUB_CLIENT_SECRET,
-  // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+  TOKEN_CLOUDINARY_CLOUD_NAME: process.env.TOKEN_CLOUDINARY_CLOUD_NAME,
+  TOKEN_CLOUDINARY_API_KEY: process.env.TOKEN_CLOUDINARY_API_KEY,
+  TOKEN_CLOUDINARY_API_SECRET: process.env.TOKEN_CLOUDINARY_API_SECRET,
+  NEXT_PUBLIC_TOKEN_CLOUDINARY_CLOUD_NAME:
+    process.env.NEXT_PUBLIC_TOKEN_CLOUDINARY_CLOUD_NAME,
+  NEXT_PUBLIC_TOKEN_CLOUDINARY_API_KEY:
+    process.env.NEXT_PUBLIC_TOKEN_CLOUDINARY_API_KEY,
 };
 
 // Don't touch the part below
