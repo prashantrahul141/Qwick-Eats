@@ -43,7 +43,7 @@ const CustomerTopBarLargeScreen: FC<{
             src={'/icons/android-chrome-192x192.png'}
             width={200}
             height={200}
-            className='h-fit w-8'
+            className='h-fit w-8 dark:invert'
             alt='Icon'></Image>
         </Link>
 
@@ -68,13 +68,13 @@ const CustomerTopBarLargeScreen: FC<{
       </div>
 
       <div className='overflow-x-auto overflow-y-hidden'>
-        <div className='flex h-10 items-start gap-[.2rem] px-8'>
+        <div className='flex h-9 items-start gap-[.2rem] px-8'>
           {navOptions.map((eachOption, index) => {
             return (
               <Link href={eachOption.url} key={index}>
-                <div className='group/tabOption flex flex-col gap-[0.7rem] rounded-md'>
+                <div className='group/tabOption flex flex-col gap-[0.4rem] rounded-md'>
                   <span
-                    className={`rounded-md px-3 py-[.1rem] hover:bg-black/10 group-hover/tabOption:bg-bord/20 dark:group-hover/tabOption:bg-white/20 ${
+                    className={`rounded-md px-3 py-[.1rem] duration-200 ease-in-out hover:bg-black/10 hover:text-black group-hover/tabOption:bg-bord/20 dark:hover:text-white dark:group-hover/tabOption:bg-white/20 ${
                       activeTab === eachOption.text
                         ? 'text-black dark:text-white'
                         : 'text-black/50 dark:text-white/60'
