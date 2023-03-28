@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
-const CustomerTopBarLargeScreen: FC<{
+const TopBarLargeScreen: FC<{
   type: DefinedUserRole;
   activeTab?: tabOptionsNames;
 }> = ({ type, activeTab = '' }) => {
@@ -94,4 +94,4 @@ const CustomerTopBarLargeScreen: FC<{
   );
 };
 
-export default CustomerTopBarLargeScreen;
+export default TopBarLargeScreen;

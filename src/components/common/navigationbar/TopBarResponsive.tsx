@@ -1,26 +1,24 @@
 import type { DefinedUserRole, tabOptionsNames } from '@src/types';
 import type { FC } from 'react';
-import CustomerTopBarLargeScreen from './TopBarLargeScreen';
-import CustomerTopBarMobile from './TopBarMobile';
+import TopBarLargeScreen from './TopBarLargeScreen';
+import TopBarMobile from './TopBarMobile';
 
-const CustomerTopBarResponsive: FC<{
+const TopBarResponsive: FC<{
   type: DefinedUserRole;
   activeTab?: tabOptionsNames;
 }> = ({ type, activeTab = '' }) => {
   return (
     <div className='w-full'>
       <div className='sm:hidden'>
-        <CustomerTopBarMobile
-          type={type}
-          activeTab={activeTab}></CustomerTopBarMobile>
+        <TopBarMobile type={type} activeTab={activeTab}></TopBarMobile>
       </div>
       <div className='hidden sm:block'>
-        <CustomerTopBarLargeScreen
+        <TopBarLargeScreen
           type={type}
-          activeTab={activeTab}></CustomerTopBarLargeScreen>
+          activeTab={activeTab}></TopBarLargeScreen>
       </div>
     </div>
   );
 };
 
-export default CustomerTopBarResponsive;
+export default TopBarResponsive;

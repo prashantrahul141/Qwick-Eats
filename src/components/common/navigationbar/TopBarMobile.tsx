@@ -16,7 +16,7 @@ import ThemePicker from '../themepicker/themepicker';
 import { IoMdClose } from 'react-icons/io';
 import Link from 'next/link';
 
-const CustomerTopBarMobile: FC<{
+const TopBarMobile: FC<{
   type: DefinedUserRole;
   activeTab?: tabOptionsNames;
 }> = ({ type, activeTab = '' }) => {
@@ -128,4 +128,4 @@ const CustomerTopBarMobile: FC<{
   );
 };
 
-export default CustomerTopBarMobile;
+export default TopBarMobile;
