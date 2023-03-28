@@ -20,7 +20,7 @@ const ThemePicker: FC = () => {
     <>
       {currentTheme === 'LIGHT' && (
         <button
-          title='Theme'
+          title='Change theme'
           className='w-fit text-black dark:text-main'
           onClick={() => {
             localStorage.setItem('theme', 'dark');
@@ -32,7 +32,7 @@ const ThemePicker: FC = () => {
       )}
       {currentTheme === 'DARK' && (
         <button
-          title='Theme'
+          title='Change theme'
           className='w-fit text-black dark:text-main'
           onClick={() => {
             localStorage.setItem('theme', 'light');
