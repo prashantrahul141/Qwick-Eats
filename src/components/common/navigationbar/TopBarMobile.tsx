@@ -61,7 +61,7 @@ const TopBarMobile: FC<{
       </nav>
       {showMenu && (
         <div
-          className='absolute top-0 left-0 z-10 h-screen w-screen bg-black/50 backdrop-blur-[3px] dark:bg-white/20'
+          className='absolute top-0 left-0 z-10 h-screen w-screen bg-black/50 backdrop-blur-[3px] dark:bg-bord/20'
           onClick={() => {
             setShowMenu(false);
           }}></div>
