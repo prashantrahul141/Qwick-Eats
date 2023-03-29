@@ -9,9 +9,10 @@ import { env } from '@src/env.mjs';
 import type { AxiosProgressEvent } from 'axios';
 import LoadingSpinner from './loadingSpinner';
 import { cloudinaryRequiredFieldsSchema } from '@src/utils/constants';
+import { reloadSession } from '@src/utils/clientSideUtilFunctions';
 
 const ProfileImageUploader: FC<{
-  closeUploaderCallback: (reload_session?: boolean) => void;
+  closeUploaderCallback: () => void;
 }> = ({ closeUploaderCallback }) => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const [chooseImage, setChooseImage] = useState(false);
@@ -54,7 +55,8 @@ const ProfileImageUploader: FC<{
             await updateProfilePictureMutation.mutateAsync({
               ...safeCloudinaryData,
             });
-            closeUploaderCallback(true);
+            closeUploaderCallback();
+            reloadSession();
           } catch (e) {
             console.error(e);
           }
@@ -75,7 +77,7 @@ const ProfileImageUploader: FC<{
   return (
     <div className='absolute top-1/2 left-1/2 z-10 h-max w-full max-w-sm -translate-y-1/2 -translate-x-1/2 justify-center rounded-md border border-black/40 bg-white px-2 py-2 dark:border-bord dark:bg-bg'>
       <div className='flex h-8 w-full justify-end'>
-        <button className='h-fit p-1' onClick={() => closeUploaderCallback()}>
+        <button className='h-fit p-1' onClick={closeUploaderCallback}>
           <AiFillCloseCircle
             className='text-gray-700 dark:text-main/90'
             size={18}></AiFillCloseCircle>
