@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 const randomAddress = [
   '4040/4041, Chandivali Farm Road, Andheri(e), Mumbai',
   '38, Bagh Lingampally, Hyderabad',
@@ -7,4 +9,10 @@ const randomAddress = [
   "31, Judge's Court Road, Alipore, Kolkata",
 ] as const;
 
-export { randomAddress };
+const cloudinaryRequiredFieldsSchema = z.object({
+  public_id: z.string(),
+  version: z.number(),
+  signature: z.string(),
+});
+
+export { randomAddress, cloudinaryRequiredFieldsSchema };
