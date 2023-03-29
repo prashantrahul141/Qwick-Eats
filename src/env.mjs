@@ -37,6 +37,7 @@ const server = z.object({
 const client = z.object({
   NEXT_PUBLIC_TOKEN_CLOUDINARY_CLOUD_NAME: z.string(),
   NEXT_PUBLIC_TOKEN_CLOUDINARY_API_KEY: z.string(),
+  NEXT_PUBLIC_CLOUDINARY_ENDPOINT: z.string(),
 });
 
 /**
@@ -61,6 +62,7 @@ const processEnv = {
     process.env.NEXT_PUBLIC_TOKEN_CLOUDINARY_CLOUD_NAME,
   NEXT_PUBLIC_TOKEN_CLOUDINARY_API_KEY:
     process.env.NEXT_PUBLIC_TOKEN_CLOUDINARY_API_KEY,
+  NEXT_PUBLIC_CLOUDINARY_ENDPOINT: process.env.NEXT_PUBLIC_CLOUDINARY_ENDPOINT,
 };
 
 // Don't touch the part below
