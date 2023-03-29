@@ -13,4 +13,10 @@ const getCurrentThemeMode = () => {
   return 'light' as const;
 };
 
-export { getCurrentThemeMode };
+// hack to force nextauth to reload session
+const reloadSession = () => {
+  const event = new Event('visibilitychange');
+  document.dispatchEvent(event);
+};
+
+export { getCurrentThemeMode, reloadSession };
