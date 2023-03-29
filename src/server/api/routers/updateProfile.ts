@@ -4,11 +4,11 @@ import { prisma } from '@src/server/db';
 import { v2 as cloudinary } from 'cloudinary';
 import { env } from '@src/env.mjs';
 
-export const exampleRouter = createTRPCRouter({
+export const updateProfileRouter = createTRPCRouter({
   updateProfilePicture: protectedProcedure
     .input(
       z.object({
-        version_number: z.number(),
+        version: z.number(),
         public_id: z.string(),
         signature: z.string(),
       })
@@ -24,7 +24,7 @@ export const exampleRouter = createTRPCRouter({
         const expectedSignature = cloudinary.utils.api_sign_request(
           {
             public_id: input.public_id,
-            version: input.version_number,
+            version: input.version,
           },
           env.TOKEN_CLOUDINARY_API_SECRET
         );
