@@ -5,18 +5,32 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import ProfileImageUploader from '@src/components/common/profileImageUploader';
+import { api } from '@src/utils/api';
+import { reloadSession } from '@src/utils/clientSideUtilFunctions';
 
 interface FormInputs {
-  image: string;
   name: string;
+  address: string;
+  phoneNumber: string;
 }
 
 const CustomerEditProfileForm: FC = () => {
   const { data: session } = useSession();
-  const { register, handleSubmit } = useForm<FormInputs>({ mode: 'all' });
+  const { register, handleSubmit } = useForm<FormInputs>({
+    mode: 'all',
+    defaultValues: {
+      name: session?.user.name,
+      phoneNumber: session?.user.phoneNumber,
+      address: session?.user.address,
+    },
+  });
   const [showImageUploader, setShowImageUploader] = useState(false);
-  const onSubmitHandler: SubmitHandler<FormInputs> = (data) => {
-    console.log(data);
+  const updateProfileMutation =
+    api.updateProfile.updateCustomerInfo.useMutation();
+
+  const onSubmitHandler: SubmitHandler<FormInputs> = async (data) => {
+    await updateProfileMutation.mutateAsync({ ...data });
+    reloadSession();
   };
 
   return (
@@ -30,12 +44,12 @@ const CustomerEditProfileForm: FC = () => {
         height={200}
         alt='Avatar'
         title='Upload new profile photo'
-        className='w-28 cursor-pointer rounded-full hover:brightness-95'
+        className='h-28 w-28 cursor-pointer rounded-full object-cover hover:brightness-95'
         onClick={() => setShowImageUploader(true)}></Image>
 
       <input
         className='input max-w-md'
-        defaultValue={session?.user.name || ''}
+        placeholder='Name'
         {...register('name', {
           required: { message: 'Without a name?', value: true },
           minLength: {
@@ -48,6 +62,47 @@ const CustomerEditProfileForm: FC = () => {
           },
         })}></input>
 
+      <input
+        type={'number'}
+        className='input resize-none pt-2'
+        {...register('phoneNumber', {
+          pattern: {
+            message: 'Invalid Phone number.',
+            value: /[0-9]/,
+          },
+          required: {
+            value: true,
+            message: 'Cannot submit without phone number.',
+          },
+          minLength: {
+            message: 'Cannot be shorter than 10 characters.',
+            value: 10,
+          },
+          maxLength: {
+            message: 'Cannot be longer than 10 characters.',
+            value: 10,
+          },
+        })}
+        placeholder={'1234567890'}></input>
+
+      <textarea
+        placeholder='Address'
+        className='input max-w-md'
+        {...register('address', {
+          required: {
+            value: true,
+            message: 'Cannot submit without address.',
+          },
+          minLength: {
+            message: 'Cannot be shorter than 10 characters.',
+            value: 11,
+          },
+        })}
+      />
+
+      <div className='flex w-full max-w-md justify-end'>
+        <button className='btn w-fit px-2'>Update Profile</button>
+      </div>
       {showImageUploader && (
         <div
           onClick={() => setShowImageUploader(false)}
