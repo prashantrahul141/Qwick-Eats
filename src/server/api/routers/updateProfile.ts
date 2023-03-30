@@ -1,5 +1,9 @@
 import { z } from 'zod';
-import { createTRPCRouter, protectedProcedure } from '@server/api/trpc';
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  protectedCustomerProcedure,
+} from '@server/api/trpc';
 import { prisma } from '@src/server/db';
 import { v2 as cloudinary } from 'cloudinary';
 import { env } from '@src/env.mjs';
@@ -39,5 +43,24 @@ export const updateProfileRouter = createTRPCRouter({
           });
         }
       }
+    }),
+
+  updateCustomerInfo: protectedCustomerProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        address: z.string(),
+        phoneNumber: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await prisma.user.update({
+        where: {
+          id: ctx.session.user.id,
+        },
+        data: {
+          ...input,
+        },
+      });
     }),
 });
