@@ -9,6 +9,7 @@ import GithubProvider from 'next-auth/providers/github';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { env } from '@src/env.mjs';
 import { prisma } from '@server/db';
+import type { UserRole } from '@prisma/client';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -20,15 +21,19 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      name: string;
+      role: UserRole;
+      address: string;
+      phoneNumber: string;
     } & DefaultSession['user'];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    name: string;
+    role: UserRole;
+    address: string;
+    phoneNumber: string;
+  }
 }
 
 /**
@@ -41,7 +46,10 @@ export const authOptions: NextAuthOptions = {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+        session.user.name = user.name;
         session.user.role = user.role;
+        session.user.address = user.address;
+        session.user.phoneNumber = user.phoneNumber || '';
       }
       return session;
     },
@@ -58,16 +66,6 @@ export const authOptions: NextAuthOptions = {
       clientId: env.TOKEN_GITHUB_CLIENT_ID,
       clientSecret: env.TOKEN_GITHUB_CLIENT_SECRET,
     }),
-
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
 };
 
