@@ -40,6 +40,7 @@ const TopBarLargeScreen: FC<{
       <div className='flex h-16 w-full items-center justify-center px-8'>
         <Link href='/' className='w-fit text-black dark:text-main'>
           <Image
+            priority
             src={'/icons/android-chrome-192x192.png'}
             width={200}
             height={200}
@@ -58,6 +59,7 @@ const TopBarLargeScreen: FC<{
 
           <Link href={`/${semiBaseUrl}/profile`}>
             <Image
+              priority
               src={session?.user.image || '/defaults/defaultAvatar.png'}
               alt='Avatar'
               width={100}
