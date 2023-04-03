@@ -25,6 +25,7 @@ declare module 'next-auth' {
       role: UserRole;
       address: string;
       phoneNumber: string;
+      companyName: string;
     } & DefaultSession['user'];
   }
 
@@ -33,6 +34,7 @@ declare module 'next-auth' {
     role: UserRole;
     address: string;
     phoneNumber: string;
+    companyName: string;
   }
 }
 
@@ -50,6 +52,7 @@ export const authOptions: NextAuthOptions = {
         session.user.role = user.role;
         session.user.address = user.address;
         session.user.phoneNumber = user.phoneNumber || '';
+        session.user.companyName = user.companyName;
       }
       return session;
     },
