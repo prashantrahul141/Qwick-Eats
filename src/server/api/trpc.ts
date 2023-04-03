@@ -136,6 +136,23 @@ const enforceUserIsCustomer = t.middleware(({ ctx, next }) => {
   });
 });
 
+/** Resusable middleware that tests if the user is vendor type or not. */
+const enforceUserIsVendor = t.middleware(({ ctx, next }) => {
+  if (
+    !ctx.session ||
+    !ctx.session.user ||
+    !ctx.session.user.role ||
+    ctx.session.user.role !== 'VENDOR'
+  ) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+
 /**
  * Protected (authenticated) procedure
  *
@@ -150,3 +167,5 @@ export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
 export const protectedCustomerProcedure = t.procedure.use(
   enforceUserIsCustomer
 );
+
+export const protectedVendorProcedure = t.procedure.use(enforceUserIsVendor);
