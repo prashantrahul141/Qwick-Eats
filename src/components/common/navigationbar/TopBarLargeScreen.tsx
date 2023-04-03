@@ -20,18 +20,22 @@ const TopBarLargeScreen: FC<{
 }> = ({ type, activeTab = '' }) => {
   const { data: session } = useSession();
   let navOptions: navigationOptions = [];
+  let shownName: string | null | undefined = '';
   let semiBaseUrl = '';
   switch (type) {
     case 'CUSTOMER':
       navOptions = customerNavigationOptions;
+      shownName = session?.user.name;
       semiBaseUrl = 'order';
       break;
     case 'VENDOR':
       navOptions = vendorNavigationOptions;
+      shownName = session?.user.companyName;
       semiBaseUrl = 'sell';
       break;
     case 'ADMIN':
       navOptions = adminNavigationOptions;
+      shownName = session?.user.name;
       semiBaseUrl = 'dashboard';
       break;
   }
@@ -50,7 +54,7 @@ const TopBarLargeScreen: FC<{
 
         <div className='ml-4 flex items-center text-lg'>
           <span className='text-black dark:text-white'>
-            Hi, <span className='font-poppins'>{session?.user.name}!</span>
+            Hi, <span className='font-poppins'>{shownName}!</span>
           </span>
         </div>
 

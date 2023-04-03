@@ -22,18 +22,22 @@ const TopBarMobile: FC<{
 }> = ({ type, activeTab = '' }) => {
   const { data: session } = useSession();
   const [showMenu, setShowMenu] = useState(false);
+  let shownName: string | null | undefined = '';
   const userAvatar = session?.user.image || '/defaults/defaultAvatar.png';
 
   let navOptions: navigationOptions = [];
   switch (type) {
     case 'CUSTOMER':
       navOptions = customerNavigationOptions;
+      shownName = session?.user.name;
       break;
     case 'VENDOR':
       navOptions = vendorNavigationOptions;
+      shownName = session?.user.companyName;
       break;
     case 'ADMIN':
       navOptions = adminNavigationOptions;
+      shownName = session?.user.name;
       break;
   }
 
@@ -90,7 +94,7 @@ const TopBarMobile: FC<{
 
           <div className='relative mt-7 flex justify-center'>
             <p className='font-poppins text-lg text-white'>
-              Hi, <span className='text-2xl'>{session?.user.name}!</span>
+              Hi, <span className='text-2xl'>{shownName}!</span>
             </p>
           </div>
           <div className='relative mt-9'>
