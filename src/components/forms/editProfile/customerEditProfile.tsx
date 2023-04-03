@@ -64,7 +64,7 @@ const CustomerEditProfileForm: FC = () => {
 
       <input
         type={'number'}
-        className='input resize-none pt-2'
+        className='input max-w-md resize-none pt-2'
         {...register('phoneNumber', {
           pattern: {
             message: 'Invalid Phone number.',
