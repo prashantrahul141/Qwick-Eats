@@ -50,6 +50,7 @@ model User {
     emailVerified    DateTime?
     image            String
     role             UserRole  @default(NOTDEFINED)
+    companyBio       String?
     accountSetupDone Boolean   @default(false)
     joinedOn         DateTime  @default(now())
     rating           Float     @default(0.0) @db.Float()
