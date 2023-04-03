@@ -10,6 +10,6 @@ type navigationOptions = Array<{
   text: string;
 }>;
 
-type tabOptionsNames = 'Home' | 'Orders' | 'Profile';
+type tabOptionsNames = 'Home' | 'Orders' | 'Profile' | 'Dashboard' | 'History';
 
 export { DefinedUserRole, navigationOptions, tabOptionsNames };

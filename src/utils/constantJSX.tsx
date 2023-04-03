@@ -1,8 +1,12 @@
 import type { navigationOptions } from '@src/types';
-import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
-import { MdFastfood } from 'react-icons/md';
+import { AiFillHome, AiOutlineHome, AiOutlineHistory } from 'react-icons/ai';
+import {
+  MdFastfood,
+  MdOutlineSpaceDashboard,
+  MdSpaceDashboard,
+} from 'react-icons/md';
 import { IoFastFoodOutline } from 'react-icons/io5';
-import { FaRegUserCircle, FaUserCircle } from 'react-icons/fa';
+import { FaRegUserCircle, FaUserCircle, FaHistory } from 'react-icons/fa';
 
 const customerNavigationOptions: navigationOptions = [
   {
@@ -24,7 +28,26 @@ const customerNavigationOptions: navigationOptions = [
     iconActive: <FaUserCircle></FaUserCircle>,
   },
 ];
-const vendorNavigationOptions: navigationOptions = [];
+const vendorNavigationOptions: navigationOptions = [
+  {
+    url: '/sell/',
+    text: 'Dashboard',
+    icon: <MdOutlineSpaceDashboard></MdOutlineSpaceDashboard>,
+    iconActive: <MdSpaceDashboard></MdSpaceDashboard>,
+  },
+  {
+    url: '/sell/history',
+    text: 'History',
+    icon: <AiOutlineHistory></AiOutlineHistory>,
+    iconActive: <FaHistory></FaHistory>,
+  },
+  {
+    url: '/sell/profile',
+    text: 'Profile',
+    icon: <FaRegUserCircle></FaRegUserCircle>,
+    iconActive: <FaUserCircle></FaUserCircle>,
+  },
+];
 const adminNavigationOptions: navigationOptions = [];
 
 export {
