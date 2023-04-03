@@ -3,6 +3,7 @@ import {
   createTRPCRouter,
   protectedProcedure,
   protectedCustomerProcedure,
+  protectedVendorProcedure,
 } from '@server/api/trpc';
 import { prisma } from '@src/server/db';
 import { v2 as cloudinary } from 'cloudinary';
@@ -64,7 +65,7 @@ export const updateProfileRouter = createTRPCRouter({
       });
     }),
 
-  updateVendorInfo: protectedCustomerProcedure
+  updateVendorInfo: protectedVendorProcedure
     .input(
       z.object({
         companyName: z.string(),
