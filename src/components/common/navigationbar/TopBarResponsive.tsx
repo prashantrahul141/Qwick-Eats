@@ -6,7 +6,7 @@ import TopBarMobile from './TopBarMobile';
 const TopBarResponsive: FC<{
   type: DefinedUserRole;
   activeTab?: tabOptionsNames;
-}> = ({ type, activeTab = '' }) => {
+}> = ({ type, activeTab }) => {
   return (
     <div className='w-full'>
       <div className='sm:hidden'>
