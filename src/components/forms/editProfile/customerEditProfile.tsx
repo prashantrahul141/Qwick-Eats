@@ -29,7 +29,7 @@ const CustomerEditProfileForm: FC = () => {
     api.updateProfile.updateCustomerInfo.useMutation();
 
   const onSubmitHandler: SubmitHandler<FormInputs> = async (data) => {
-    await updateProfileMutation.mutateAsync({ ...data });
+    await updateProfileMutation.mutateAsync(data);
     reloadSession();
   };
 
