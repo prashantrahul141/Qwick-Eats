@@ -63,4 +63,23 @@ export const updateProfileRouter = createTRPCRouter({
         },
       });
     }),
+
+  updateVendorInfo: protectedCustomerProcedure
+    .input(
+      z.object({
+        companyName: z.string(),
+        address: z.string(),
+        phoneNumber: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await prisma.user.update({
+        where: {
+          id: ctx.session.user.id,
+        },
+        data: {
+          ...input,
+        },
+      });
+    }),
 });
