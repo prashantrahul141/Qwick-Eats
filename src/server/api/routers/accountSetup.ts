@@ -24,6 +24,7 @@ export const accountSetupRouter = createTRPCRouter({
           data: {
             address: input.addr,
             phoneNumber: input.phoneNumber,
+
             accountSetupDone: true,
             role: 'CUSTOMER',
           },
@@ -35,8 +36,9 @@ export const accountSetupRouter = createTRPCRouter({
     .input(
       z.object({
         companyName: z.string(),
-        addr: z.string(),
+        address: z.string(),
         phoneNumber: z.string(),
+        companyBio: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -56,8 +58,9 @@ export const accountSetupRouter = createTRPCRouter({
           },
           data: {
             companyName: input.companyName,
-            address: input.addr,
+            address: input.address,
             phoneNumber: input.phoneNumber,
+            companyBio: input.companyBio,
             role: 'VENDOR',
             accountSetupDone: true,
           },
