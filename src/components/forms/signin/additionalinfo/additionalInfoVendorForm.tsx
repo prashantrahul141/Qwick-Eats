@@ -7,7 +7,8 @@ import { useForm } from 'react-hook-form';
 
 type FormInputs = {
   companyName: string;
-  addr: string;
+  companyBio: string;
+  address: string;
   phoneNumber: string;
 };
 
@@ -22,7 +23,7 @@ const AdditionalInfoVendorForm: FC = () => {
   const router = useRouter();
 
   const submitVendorForm: SubmitHandler<FormInputs> = async (data) => {
-    await accountSetupMutation.mutateAsync({ ...data });
+    await accountSetupMutation.mutateAsync(data);
     void router.push('/sell');
   };
 
@@ -56,13 +57,42 @@ const AdditionalInfoVendorForm: FC = () => {
           </span>
         )}
       </fieldset>
+
+      <fieldset className='group relative mb-6 w-full max-w-xl'>
+        <label className='absolute -top-[.68rem] left-4 select-none bg-white text-sm text-gray-700 dark:bg-bg dark:text-gray-300'>
+          <span>Company Bio</span>
+        </label>
+        <textarea
+          className='input resize-none pt-2'
+          {...register('companyBio', {
+            required: {
+              value: true,
+              message: 'Cannot submit without company bio.',
+            },
+            minLength: {
+              message: 'Cannot be shorter than 10 characters.',
+              value: 11,
+            },
+            maxLength: {
+              message: 'Cannot be longer than 50 characters.',
+              value: 50,
+            },
+          })}
+          placeholder={'Best pizzas in India.'}></textarea>
+        {errors.companyBio && (
+          <span className='text-[#ff0f0f] dark:text-red-500'>
+            {errors.companyBio.message}
+          </span>
+        )}
+      </fieldset>
+
       <fieldset className='group relative mb-6 w-full max-w-xl'>
         <label className='absolute -top-[.68rem] left-4 select-none bg-white text-sm text-gray-700 dark:bg-bg dark:text-gray-300'>
           <span>Full Address</span>
         </label>
         <textarea
           className='input resize-none pt-2'
-          {...register('addr', {
+          {...register('address', {
             required: {
               value: true,
               message: 'Cannot submit without address.',
@@ -75,9 +105,9 @@ const AdditionalInfoVendorForm: FC = () => {
           placeholder={
             randomAddress[Math.floor(Math.random() * randomAddress.length)]
           }></textarea>
-        {errors.addr && (
+        {errors.address && (
           <span className='text-[#ff0f0f] dark:text-red-500'>
-            {errors.addr.message}
+            {errors.address.message}
           </span>
         )}
       </fieldset>
