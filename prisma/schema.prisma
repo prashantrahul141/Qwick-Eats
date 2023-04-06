@@ -110,7 +110,7 @@ model order {
     totalCost Float      @default(0.0) @db.Double()
     cartItems cartItem[]
 
-    orderState orderState
+    orderState orderState @default(PENDING)
 
     user       User   @relation("customer", fields: [customerId], references: [id])
     customerId String
