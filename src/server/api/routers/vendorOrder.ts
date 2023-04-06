@@ -20,12 +20,30 @@ export const vendorOrderRouter = createTRPCRouter({
         ? prisma.order.findMany({
             where: {
               vendorId: ctx.session.user.id,
-              orderState: input.orderState,
+              AND: {
+                orderState: input.orderState,
+              },
+            },
+            include: {
+              user: true,
+              cartItems: {
+                include: {
+                  foodItem: true,
+                },
+              },
             },
           })
         : prisma.order.findMany({
             where: {
               vendorId: ctx.session.user.id,
+            },
+            include: {
+              user: true,
+              cartItems: {
+                include: {
+                  foodItem: true,
+                },
+              },
             },
           }));
       return orders;
