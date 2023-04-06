@@ -98,10 +98,19 @@ model cartItem {
     orderId String?
 }
 
+enum orderState {
+    CANCELLED
+    PENDING
+    PROCESSSING
+    DONE
+}
+
 model order {
     id        String     @id @default(cuid())
     totalCost Float      @default(0.0) @db.Double()
     cartItems cartItem[]
+
+    orderState orderState
 
     user       User   @relation("customer", fields: [customerId], references: [id])
     customerId String
