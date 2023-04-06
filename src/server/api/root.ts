@@ -3,6 +3,7 @@ import { exampleRouter } from '@server/api/routers/example';
 import { accountSetupRouter } from './routers/accountSetup';
 import { utilsRouter } from './routers/getSignature';
 import { updateProfileRouter } from './routers/updateProfile';
+import { vendorOrderRouter } from './routers/vendorOrder';
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   accountSetup: accountSetupRouter,
   utils: utilsRouter,
   updateProfile: updateProfileRouter,
+  vendorOrder: vendorOrderRouter,
 });
 
 // export type definition of API
