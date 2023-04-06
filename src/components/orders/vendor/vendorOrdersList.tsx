@@ -1,18 +1,43 @@
-import type { orderState } from '@prisma/client';
+import type { order, orderState } from '@prisma/client';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { allOrderFilterOptions } from '@src/utils/constants';
 import { BsChevronExpand } from 'react-icons/bs';
+import { api } from '@src/utils/api';
+import LoadingSpinner from '@src/components/common/loadingSpinner';
 
 const VendorOrdersList: FC = () => {
+  const [ordersList, setOrdersList] = useState<Array<order>>([]);
   const [ordersFilterState, setOrdersFilter] = useState<orderState | 'ALL'>(
     'ALL'
   );
+  const getAllOrdersQuery = api.vendorOrder.getAllOrders.useQuery({
+    orderState: ordersFilterState,
+  });
+
+  // refetch orders when filter is change.
   useEffect(() => {
-    console.log(ordersFilterState);
+    getAllOrdersQuery
+      .refetch()
+      .then((result) => {
+        if (result.data) {
+          setOrdersList(result.data);
+        }
+      })
+      .catch(() => {
+        undefined;
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ordersFilterState]);
+
+  // set data state
+  useEffect(() => {
+    if (getAllOrdersQuery.data) {
+      setOrdersList(getAllOrdersQuery.data);
+    }
+  }, [getAllOrdersQuery.data]);
 
   return (
     <>
@@ -65,7 +90,32 @@ const VendorOrdersList: FC = () => {
           </div>
         </Listbox>
       </div>
+
       {/* Orders */}
+      <div className='w-full'>
+        <div className='mx-auto w-fit'>
+          {getAllOrdersQuery.status === 'success' &&
+            ordersList.map((e) => {
+              return (
+                <>
+                  <div className='text-black dark:text-white'>{e.id}</div>
+                </>
+              );
+            })}
+
+          {getAllOrdersQuery.status === 'loading' && (
+            <LoadingSpinner></LoadingSpinner>
+          )}
+
+          {getAllOrdersQuery.status === 'error' && (
+            <div className='w-full'>
+              <span className='text-black dark:text-white'>
+                Unable to fetch orders.
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };
