@@ -7,6 +7,7 @@ import { allOrderFilterOptions } from '@src/utils/constants';
 import { BsChevronExpand } from 'react-icons/bs';
 import { api } from '@src/utils/api';
 import LoadingSpinner from '@src/components/common/loadingSpinner';
+import VendorOrder from './vendorOrder';
 
 const VendorOrdersList: FC = () => {
   const [ordersList, setOrdersList] = useState<Array<order>>([]);
@@ -35,7 +36,7 @@ const VendorOrdersList: FC = () => {
   // set data state
   useEffect(() => {
     if (getAllOrdersQuery.data) {
-      setOrdersList(getAllOrdersQuery.data);
+      setOrdersList(() => getAllOrdersQuery.data);
     }
   }, [getAllOrdersQuery.data]);
 
@@ -46,7 +47,13 @@ const VendorOrdersList: FC = () => {
         <Listbox value={ordersFilterState} onChange={setOrdersFilter}>
           <div className='relative ml-auto mt-2 mr-2 max-w-xs'>
             <Listbox.Button className='relative w-full cursor-pointer rounded-md border border-muted/20 bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300 dark:border-bord dark:bg-black dark:text-white sm:text-sm'>
-              <span className='block truncate'>{ordersFilterState}</span>
+              <span className='block truncate'>
+                {`${String(ordersFilterState[0])}${String(
+                  ordersFilterState
+                    .slice(1, ordersFilterState.length)
+                    .toLowerCase()
+                )}`}
+              </span>
               <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
                 <BsChevronExpand
                   className='h-5 w-5 text-gray-400'
@@ -95,20 +102,18 @@ const VendorOrdersList: FC = () => {
       <div className='w-full'>
         <div className='mx-auto w-fit'>
           {getAllOrdersQuery.status === 'success' &&
-            ordersList.map((e) => {
-              return (
-                <>
-                  <div className='text-black dark:text-white'>{e.id}</div>
-                </>
-              );
+            ordersList.map((order) => {
+              return <VendorOrder key={order.id} order={order}></VendorOrder>;
             })}
 
           {getAllOrdersQuery.status === 'loading' && (
-            <LoadingSpinner></LoadingSpinner>
+            <div className='h-72'>
+              <LoadingSpinner></LoadingSpinner>
+            </div>
           )}
 
           {getAllOrdersQuery.status === 'error' && (
-            <div className='w-full'>
+            <div className='flex h-72 w-full items-center justify-center'>
               <span className='text-black dark:text-white'>
                 Unable to fetch orders.
               </span>
