@@ -1,4 +1,5 @@
-import type { UserRole } from '@prisma/client';
+import type { User, UserRole } from '@prisma/client';
+import type { order, cartItem, foodItem } from '@prisma/client';
 import type { ReactNode } from 'react';
 
 type DefinedUserRole = Exclude<UserRole, 'NOTDEFINED'>;
@@ -12,4 +13,18 @@ type navigationOptions = Array<{
 
 type tabOptionsNames = 'Home' | 'Orders' | 'Profile' | 'Dashboard' | 'History';
 
-export { DefinedUserRole, navigationOptions, tabOptionsNames };
+type TReturnVendorOrder = order & {
+  user: User;
+  cartItems: Array<
+    cartItem & {
+      foodItem: foodItem;
+    }
+  >;
+};
+
+export {
+  DefinedUserRole,
+  navigationOptions,
+  tabOptionsNames,
+  TReturnVendorOrder,
+};
