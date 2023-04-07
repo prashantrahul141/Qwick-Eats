@@ -46,7 +46,7 @@ const VendorOrdersList: FC = () => {
       <div className='mt-2 w-full'>
         {/* Orders Filter */}
         <Listbox value={ordersFilterState} onChange={setOrdersFilter}>
-          <div className='relative ml-auto mt-2 mr-2 max-w-xs select-none'>
+          <div className='relative z-10 ml-auto mt-2 mr-2 max-w-xs select-none'>
             <Listbox.Button className='relative w-full cursor-pointer rounded-md border border-muted/20 bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300 dark:border-bord dark:bg-black dark:text-white sm:text-sm'>
               <span className='block truncate'>
                 {`${String(ordersFilterState[0])}${String(
