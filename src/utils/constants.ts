@@ -23,7 +23,7 @@ const orderStateOptions: Array<{
   { title: 'Cancelled', value: 'CANCELLED' },
   { title: 'Done', value: 'DONE' },
   { title: 'Pending', value: 'PENDING' },
-  { title: 'Processing', value: 'PROCESSSING' },
+  { title: 'Processing', value: 'PROCESSING' },
 ];
 
 const allOrderFilterOptions: Array<{
