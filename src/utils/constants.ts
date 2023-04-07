@@ -16,15 +16,24 @@ const cloudinaryRequiredFieldsSchema = z.object({
   signature: z.string(),
 });
 
-const allOrderFilterOptions: Array<{
+const orderStateOptions: Array<{
   title: string;
-  value: orderState | 'ALL';
+  value: orderState;
 }> = [
-  { title: 'All', value: 'ALL' },
   { title: 'Cancelled', value: 'CANCELLED' },
   { title: 'Done', value: 'DONE' },
   { title: 'Pending', value: 'PENDING' },
   { title: 'Processing', value: 'PROCESSSING' },
 ];
 
-export { randomAddress, cloudinaryRequiredFieldsSchema, allOrderFilterOptions };
+const allOrderFilterOptions: Array<{
+  title: string;
+  value: orderState | 'ALL';
+}> = [{ title: 'All', value: 'ALL' }, ...orderStateOptions];
+
+export {
+  randomAddress,
+  cloudinaryRequiredFieldsSchema,
+  orderStateOptions,
+  allOrderFilterOptions,
+};
