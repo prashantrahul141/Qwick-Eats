@@ -25,16 +25,19 @@ const reloadSession = () => {
 const getOrderStatusColor = (state: orderState) => {
   switch (state) {
     case 'CANCELLED':
-      return 'text-red-500';
+      return 'text-red-400 dark:text-red-500';
 
     case 'DONE':
-      return 'text-green-500';
+      return 'text-green-400 dark:text-green-500';
 
     case 'PENDING':
-      return 'text-orange-500';
+      return 'text-orange-400 dark:text-orange-500';
 
-    case 'PROCESSSING':
-      return 'text-yellow-500';
+    case 'PROCESSING':
+      return 'text-yellow-400 dark:text-yellow-500';
+
+    default:
+      return 'text-black dark:text-white';
   }
 };
 
