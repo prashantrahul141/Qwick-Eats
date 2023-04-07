@@ -101,7 +101,7 @@ model cartItem {
 enum orderState {
     CANCELLED
     PENDING
-    PROCESSSING
+    PROCESSING
     DONE
 }
 
