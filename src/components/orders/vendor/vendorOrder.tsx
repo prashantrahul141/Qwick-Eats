@@ -28,7 +28,7 @@ const VendorOrder: FC<{ order: TReturnVendorOrder }> = ({ order }) => {
 
   return (
     <>
-      <div className='rounded-md border border-gray-300 px-3 py-2 text-black shadow-md dark:border-bord dark:bg-black dark:text-white'>
+      <div className='w-screen max-w-3xl rounded-md border border-gray-300 px-3 py-2 text-black shadow-md dark:border-bord dark:bg-black dark:text-white'>
         {/* primary info */}
         <div className='flex justify-center gap-4'>
           <div className='w-1/2'>
@@ -69,16 +69,19 @@ const VendorOrder: FC<{ order: TReturnVendorOrder }> = ({ order }) => {
           </div>
         </div>
 
-        {/* status */}
-        <div className='mt-1'>
-          <span className='text-xs'>Status:&nbsp;</span>
-          <span className={getOrderStatusColor(defaultOrderState) + ''}>
-            {defaultOrderState}
-          </span>
-        </div>
-
         {/* interactions */}
-        <div className='mt-3 flex items-center justify-center gap-3'>
+        <div className='mt-4 flex items-center justify-end gap-3'>
+          {/* status */}
+          <div className='flex-auto '>
+            <span className='text-xs'>Status:&nbsp;</span>
+            <span
+              className={`${String(
+                getOrderStatusColor(defaultOrderState)
+              )} font-bold`}>
+              {defaultOrderState}
+            </span>
+          </div>
+
           <Listbox value={orderStateVar} onChange={setOrderStateVar}>
             <div className='relative w-[10rem] select-none'>
               <Listbox.Button className='relative w-full cursor-pointer rounded-md border border-muted/20 bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300 dark:border-bord dark:bg-black dark:text-white sm:text-sm'>
@@ -129,7 +132,6 @@ const VendorOrder: FC<{ order: TReturnVendorOrder }> = ({ order }) => {
               </Transition>
             </div>
           </Listbox>
-
           <button
             onClick={updateOrderState}
             className='btn h-9 max-w-fit px-3 py-0'
