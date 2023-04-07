@@ -1,3 +1,5 @@
+import type { orderState } from '@prisma/client';
+
 const getCurrentThemeMode = () => {
   if (typeof window !== 'undefined') {
     if (
@@ -19,4 +21,21 @@ const reloadSession = () => {
   document.dispatchEvent(event);
 };
 
-export { getCurrentThemeMode, reloadSession };
+// get order status color.
+const getOrderStatusColor = (state: orderState) => {
+  switch (state) {
+    case 'CANCELLED':
+      return 'text-red-500';
+
+    case 'DONE':
+      return 'text-green-500';
+
+    case 'PENDING':
+      return 'text-orange-500';
+
+    case 'PROCESSSING':
+      return 'text-yellow-500';
+  }
+};
+
+export { getCurrentThemeMode, reloadSession, getOrderStatusColor };
