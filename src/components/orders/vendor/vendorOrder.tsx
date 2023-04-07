@@ -73,7 +73,6 @@ const VendorOrder: FC<{ order: TReturnVendorOrder }> = ({ order }) => {
         <div className='mt-4 flex items-center justify-end gap-3'>
           {/* status */}
           <div className='flex-auto '>
-            <span className='text-xs'>Status:&nbsp;</span>
             <span
               className={`${String(
                 getOrderStatusColor(defaultOrderState)
