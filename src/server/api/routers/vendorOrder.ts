@@ -3,13 +3,31 @@ import { createTRPCRouter, protectedVendorProcedure } from '@server/api/trpc';
 import { prisma } from '@src/server/db';
 
 export const vendorOrderRouter = createTRPCRouter({
+  updateOrderState: protectedVendorProcedure
+    .input(
+      z.object({
+        targetState: z.enum(['PROCESSING', 'DONE', 'CANCELLED', 'PENDING']),
+        targetOrderId: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      await prisma.order.update({
+        where: {
+          id: input.targetOrderId,
+        },
+        data: {
+          orderState: input.targetState,
+        },
+      });
+    }),
+
   getAllOrders: protectedVendorProcedure
     .input(
       z.object({
         orderState: z.enum([
           'CANCELLED',
           'PENDING',
-          'PROCESSSING',
+          'PROCESSING',
           'DONE',
           'ALL',
         ]),
