@@ -1,6 +1,6 @@
 import LoadingSpinner from '@src/components/common/loadingSpinner';
-import NonLoginTopBar from '@src/components/common/navigationbar/nonLoginTopBar';
-import SignInForm from '@src/components/forms/signin/signInForm';
+import NonLoginTopBar from '@src/components/common/navigationbar/nonlogintopbar';
+import SignInForm from '@src/components/forms/signin/signinform';
 import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
