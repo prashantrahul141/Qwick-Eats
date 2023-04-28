@@ -12,16 +12,22 @@ interface FormInputs {
   companyName: string;
   address: string;
   phoneNumber: string;
+  companyBio: string;
 }
 
 const VendorEditProfileForm: FC = () => {
   const { data: session } = useSession();
-  const { register, handleSubmit } = useForm<FormInputs>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>({
     mode: 'all',
     defaultValues: {
       companyName: session?.user.companyName,
       phoneNumber: session?.user.phoneNumber,
       address: session?.user.address,
+      companyBio: session?.user.companyBio,
     },
   });
   const [showImageUploader, setShowImageUploader] = useState(false);
@@ -47,58 +53,107 @@ const VendorEditProfileForm: FC = () => {
         className='h-28 w-28 cursor-pointer rounded-full object-cover hover:brightness-95'
         onClick={() => setShowImageUploader(true)}></Image>
 
-      <input
-        className='input max-w-md'
-        placeholder='Company Name'
-        {...register('companyName', {
-          required: { message: 'Without a name?', value: true },
-          minLength: {
-            value: 2,
-            message: 'Cannot be shorter than 2 characters.',
-          },
-          maxLength: {
-            value: 50,
-            message: 'Cannot be longer than 50 characters.',
-          },
-        })}></input>
+      <div className='w-[28rem]'>
+        <input
+          className='input max-w-md'
+          placeholder='Company Name'
+          {...register('companyName', {
+            required: { message: 'Without a name?', value: true },
+            minLength: {
+              value: 2,
+              message: 'Cannot be shorter than 2 characters.',
+            },
+            maxLength: {
+              value: 50,
+              message: 'Cannot be longer than 50 characters.',
+            },
+          })}></input>
+        {errors.companyName && (
+          <span className='w-full max-w-md text-[#ff0f0f] dark:text-red-500'>
+            {errors.companyName.message}
+          </span>
+        )}
+      </div>
 
-      <input
-        type={'number'}
-        className='input max-w-md resize-none pt-2'
-        {...register('phoneNumber', {
-          pattern: {
-            message: 'Invalid Phone number.',
-            value: /[0-9]/,
-          },
-          required: {
-            value: true,
-            message: 'Cannot submit without phone number.',
-          },
-          minLength: {
-            message: 'Cannot be shorter than 10 characters.',
-            value: 10,
-          },
-          maxLength: {
-            message: 'Cannot be longer than 10 characters.',
-            value: 10,
-          },
-        })}
-        placeholder={'1234567890'}></input>
+      <div className='w-[28rem]'>
+        <input
+          type={'number'}
+          className='input max-w-md resize-none pt-2'
+          {...register('phoneNumber', {
+            pattern: {
+              message: 'Invalid Phone number.',
+              value: /[0-9]/,
+            },
+            required: {
+              value: true,
+              message: 'Cannot submit without phone number.',
+            },
+            minLength: {
+              message: 'Cannot be shorter than 10 characters.',
+              value: 10,
+            },
+            maxLength: {
+              message: 'Cannot be longer than 10 characters.',
+              value: 10,
+            },
+          })}
+          placeholder={'1234567890'}></input>
+        {errors.phoneNumber && (
+          <span className='w-full max-w-md text-[#ff0f0f] dark:text-red-500'>
+            {errors.phoneNumber.message}
+          </span>
+        )}
+      </div>
 
-      <textarea
-        placeholder='Address'
-        className='input max-w-md'
-        {...register('address', {
-          required: {
-            value: true,
-            message: 'Cannot submit without address.',
-          },
-          minLength: {
-            message: 'Cannot be shorter than 10 characters.',
-            value: 11,
-          },
-        })}
-      />
+      <div className='w-[28rem]'>
+        <textarea
+          placeholder='Address'
+          className='input max-w-md'
+          {...register('address', {
+            required: {
+              value: true,
+              message: 'Cannot submit without address.',
+            },
+            minLength: {
+              message: 'Cannot be shorter than 10 characters.',
+              value: 11,
+            },
+          })}
+        />
+
+        {errors.address && (
+          <span className='w-full max-w-md text-[#ff0f0f] dark:text-red-500'>
+            {errors.address.message}
+          </span>
+        )}
+      </div>
+
+      <div className='w-[28rem]'>
+        <textarea
+          placeholder='Company bio'
+          className='input max-w-md'
+          {...register('companyBio', {
+            required: {
+              value: true,
+              message: 'Cannot submit without company bio.',
+            },
+            minLength: {
+              message: 'Cannot be shorter than 10 characters.',
+              value: 11,
+            },
+            maxLength: {
+              message: 'Cannot be longer than 50 characters.',
+              value: 70,
+            },
+          })}
+        />
+
+        {errors.companyBio && (
+          <span className='w-full max-w-md text-[#ff0f0f] dark:text-red-500'>
+            {errors.companyBio.message}
+          </span>
+        )}
+      </div>
 
       <div className='flex w-full max-w-md justify-end'>
         <button className='btn w-fit px-2'>Update Profile</button>
