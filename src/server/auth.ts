@@ -26,6 +26,7 @@ declare module 'next-auth' {
       address: string;
       phoneNumber: string;
       companyName: string;
+      companyBio: string;
     } & DefaultSession['user'];
   }
 
@@ -35,6 +36,7 @@ declare module 'next-auth' {
     address: string;
     phoneNumber: string;
     companyName: string;
+    companyBio: string;
   }
 }
 
@@ -53,6 +55,7 @@ export const authOptions: NextAuthOptions = {
         session.user.address = user.address;
         session.user.phoneNumber = user.phoneNumber || '';
         session.user.companyName = user.companyName;
+        session.user.companyBio = user.companyBio;
       }
       return session;
     },
