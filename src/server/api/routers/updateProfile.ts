@@ -71,6 +71,7 @@ export const updateProfileRouter = createTRPCRouter({
         companyName: z.string(),
         address: z.string(),
         phoneNumber: z.string(),
+        companyBio: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
