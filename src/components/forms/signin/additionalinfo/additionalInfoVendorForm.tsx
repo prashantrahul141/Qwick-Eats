@@ -1,4 +1,5 @@
 import { api } from '@src/utils/api';
+import { reloadSession } from '@src/utils/clientSideUtilFunctions';
 import { randomAddress } from '@src/utils/constants';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -25,6 +26,7 @@ const AdditionalInfoVendorForm: FC = () => {
   const submitVendorForm: SubmitHandler<FormInputs> = async (data) => {
     await accountSetupMutation.mutateAsync(data);
     void router.push('/sell');
+    reloadSession();
   };
 
   return (
@@ -75,7 +77,7 @@ const AdditionalInfoVendorForm: FC = () => {
             },
             maxLength: {
               message: 'Cannot be longer than 50 characters.',
-              value: 50,
+              value: 70,
             },
           })}
           placeholder={'Best pizzas in India.'}></textarea>

@@ -1,5 +1,6 @@
 import InfoHoverIcon from '@src/components/common/infoHoverIcon';
 import { api } from '@src/utils/api';
+import { reloadSession } from '@src/utils/clientSideUtilFunctions';
 import { randomAddress } from '@src/utils/constants';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -24,8 +25,8 @@ const AdditionalInfoCustomerForm: FC = () => {
     await accountSetupMutation.mutateAsync({
       ...data,
     });
-
     void router.push('/order');
+    reloadSession();
   };
 
   return (
