@@ -11,7 +11,13 @@ type navigationOptions = Array<{
   text: string;
 }>;
 
-type tabOptionsNames = 'Home' | 'Orders' | 'Profile' | 'Dashboard' | 'History';
+type tabOptionsNames =
+  | 'Home'
+  | 'Orders'
+  | 'Profile'
+  | 'Dashboard'
+  | 'History'
+  | 'Food Items';
 
 type TReturnVendorOrder = order & {
   user: User;

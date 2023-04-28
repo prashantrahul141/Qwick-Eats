@@ -4,6 +4,7 @@ import {
   MdFastfood,
   MdOutlineSpaceDashboard,
   MdSpaceDashboard,
+  MdOutlineFastfood,
 } from 'react-icons/md';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { FaRegUserCircle, FaUserCircle, FaHistory } from 'react-icons/fa';
@@ -34,6 +35,12 @@ const vendorNavigationOptions: navigationOptions = [
     text: 'Dashboard',
     icon: <MdOutlineSpaceDashboard></MdOutlineSpaceDashboard>,
     iconActive: <MdSpaceDashboard></MdSpaceDashboard>,
+  },
+  {
+    url: '/sell/fooditems',
+    text: 'Food Items',
+    icon: <MdOutlineFastfood></MdOutlineFastfood>,
+    iconActive: <MdFastfood></MdFastfood>,
   },
   {
     url: '/sell/history',
