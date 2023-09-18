@@ -21,9 +21,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <div className='h-screen bg-bg-white dark:bg-bg'>
-        <Component {...pageProps} />
-      </div>
+      <div className='fixed -z-10 h-screen w-screen  bg-bg-white dark:bg-bg'></div>
+      <Component className='z-0' {...pageProps} />
     </SessionProvider>
   );
 };
