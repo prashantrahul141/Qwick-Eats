@@ -54,7 +54,7 @@ const AdditionalInfoForm: FC = () => {
         </span>{' '}
         on qwick
       </div>
-      <div className='mt-8 flex justify-center'>
+      <div className='mt-8 flex justify-center pb-24'>
         {selectedUserType === 'CUSTOMER' && (
           <AdditionalInfoCustomerForm></AdditionalInfoCustomerForm>
         )}
