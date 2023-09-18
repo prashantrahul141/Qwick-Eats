@@ -12,7 +12,7 @@ const NonLoginTopBar: FC = () => {
           className='absolute left-4 h-16 w-16 text-black dark:text-main sm:h-14 sm:w-14'>
           <Icon></Icon>
         </Link>
-        <div className='absolute right-3 flex items-center justify-center gap-4 sm:gap-2'>
+        <div className='absolute right-3 flex items-center justify-center gap-12 sm:gap-5'>
           <Link
             href={'/signin'}
             className='text-gray-600 hover:text-black dark:text-muted dark:hover:text-main'>
