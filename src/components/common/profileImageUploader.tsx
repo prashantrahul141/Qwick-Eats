@@ -8,7 +8,10 @@ import axios from 'axios';
 import { env } from '@src/env.mjs';
 import type { AxiosProgressEvent } from 'axios';
 import LoadingSpinner from './loadingSpinner';
-import { cloudinaryRequiredFieldsSchema } from '@src/utils/constants';
+import {
+  allowedImageTypes,
+  cloudinaryRequiredFieldsSchema,
+} from '@src/utils/constants';
 import { reloadSession } from '@src/utils/clientSideUtilFunctions';
 
 const ProfileImageUploader: FC<{
@@ -48,17 +51,18 @@ const ProfileImageUploader: FC<{
           }
         );
         if (cloudinaryResponse.status === 200 && cloudinaryResponse.data) {
-          try {
-            const safeCloudinaryData = cloudinaryRequiredFieldsSchema.parse(
-              cloudinaryResponse.data
+          const safeCloudinaryData = cloudinaryRequiredFieldsSchema.safeParse(
+            cloudinaryResponse.data
+          );
+          if (safeCloudinaryData.success) {
+            await updateProfilePictureMutation.mutateAsync(
+              safeCloudinaryData.data
             );
-            await updateProfilePictureMutation.mutateAsync({
-              ...safeCloudinaryData,
-            });
             closeUploaderCallback();
             reloadSession();
-          } catch (e) {
-            console.error(e);
+          } else {
+            console.error(safeCloudinaryData.error);
+            reloadSession();
           }
         }
       }
@@ -67,10 +71,17 @@ const ProfileImageUploader: FC<{
 
   const onSelectedImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
-    if (files && files[0]) {
-      setChooseImage(true);
-      setSelectedImage(files[0]);
-      setSelectedImageObjURL(URL.createObjectURL(files[0]));
+    if (files) {
+      const imageFile = files[0];
+      if (
+        imageFile &&
+        allowedImageTypes.some((el) => imageFile.name.endsWith(el))
+      ) {
+        setChooseImage(true);
+        setSelectedImage(imageFile);
+        setSelectedImageObjURL(URL.createObjectURL(imageFile));
+      } else {
+      }
     }
   };
 
@@ -101,7 +112,7 @@ const ProfileImageUploader: FC<{
               alt='New Image'
               className='max-h-80 rounded-md'></img>
             <button
-              className='absolute top-2 right-2 rounded-md p-1 text-red-400 hover:bg-red-500 hover:text-white dark:text-white'
+              className='absolute top-2 right-2 rounded-md bg-gray-700/40 p-1 text-red-400 hover:bg-red-500 hover:text-white dark:text-white'
               onClick={() => {
                 setChooseImage(false);
                 setSelectedImage(null);
