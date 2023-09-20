@@ -53,7 +53,7 @@ const VendorEditProfileForm: FC = () => {
         className='h-28 w-28 cursor-pointer rounded-full object-cover hover:brightness-95'
         onClick={() => setShowImageUploader(true)}></Image>
 
-      <div className='w-[28rem]'>
+      <div className='w-full max-w-[28rem]'>
         <input
           className='input max-w-md'
           placeholder='Company Name'
@@ -75,7 +75,7 @@ const VendorEditProfileForm: FC = () => {
         )}
       </div>
 
-      <div className='w-[28rem]'>
+      <div className='w-full max-w-[28rem]'>
         <input
           type={'number'}
           className='input max-w-md resize-none pt-2'
@@ -105,7 +105,7 @@ const VendorEditProfileForm: FC = () => {
         )}
       </div>
 
-      <div className='w-[28rem]'>
+      <div className='w-full max-w-[28rem]'>
         <textarea
           placeholder='Address'
           className='input max-w-md'
@@ -128,7 +128,7 @@ const VendorEditProfileForm: FC = () => {
         )}
       </div>
 
-      <div className='w-[28rem]'>
+      <div className='w-full max-w-[28rem]'>
         <textarea
           placeholder='Company bio'
           className='input max-w-md'
