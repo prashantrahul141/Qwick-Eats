@@ -42,7 +42,9 @@ const TopBarLargeScreen: FC<{
   return (
     <nav className='h-26 w-full select-none border-b border-b-gray-400/40 bg-white dark:border-b-bord dark:bg-black'>
       <div className='flex h-16 w-full items-center justify-center px-8'>
-        <Link href='/' className='w-fit text-black dark:text-main'>
+        <Link
+          href={`/${semiBaseUrl}`}
+          className='w-fit text-black dark:text-main'>
           <Image
             priority
             src={'/icons/android-chrome-192x192.png'}
