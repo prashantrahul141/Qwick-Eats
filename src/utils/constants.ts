@@ -31,9 +31,12 @@ const allOrderFilterOptions: Array<{
   value: orderState | 'ALL';
 }> = [{ title: 'All', value: 'ALL' }, ...orderStateOptions];
 
+const allowedImageTypes = ['.jpg', '.png', '.jpeg'];
+
 export {
   randomAddress,
   cloudinaryRequiredFieldsSchema,
   orderStateOptions,
   allOrderFilterOptions,
+  allowedImageTypes,
 };
