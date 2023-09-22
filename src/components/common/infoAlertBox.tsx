@@ -24,7 +24,7 @@ const InfoAlertBox: FC<{
             leave='ease-in duration-200'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'>
-            <div className='fixed inset-0 bg-black bg-opacity-25' />
+            <div className='fixed inset-0 bg-black bg-opacity-40 dark:bg-black dark:bg-opacity-50' />
           </Transition.Child>
 
           <div className='fixed inset-0 overflow-y-auto'>
@@ -37,14 +37,16 @@ const InfoAlertBox: FC<{
                 leave='ease-in duration-200'
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'>
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-bord'>
+                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all dark:border dark:border-zinc-800 dark:bg-black'>
                   <Dialog.Title
                     as='h3'
-                    className='text-lg font-medium leading-6 text-gray-900'>
+                    className='text-lg font-medium leading-6 text-gray-900 dark:text-white'>
                     {title}
                   </Dialog.Title>
                   <div className='mt-2'>
-                    <p className='text-sm text-gray-500'>{desc} </p>
+                    <p className='text-sm text-gray-500 dark:text-gray-400'>
+                      {desc}
+                    </p>
                   </div>
 
                   <div className='mt-4'>
