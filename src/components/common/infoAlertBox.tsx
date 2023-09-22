@@ -1,34 +1,68 @@
+import { Dialog, Transition } from '@headlessui/react';
 import type { FC } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { Fragment } from 'react';
 
 const InfoAlertBox: FC<{
-  callbackFnOnClose: () => void;
+  isOpen: boolean;
+  setOpen: (target: boolean) => void;
   title: string;
   desc: string;
-}> = ({ callbackFnOnClose, title, desc }) => {
+}> = ({ isOpen, setOpen, title, desc }) => {
+  const closeModal = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-      <div
-        className='fixed top-0 left-0 h-screen w-screen bg-black opacity-50'
-        onClick={callbackFnOnClose}></div>
-      <div
-        role='alert'
-        className='fixed top-1/2 left-1/2 h-max w-full max-w-lg -translate-x-1/2 rounded-md border bg-main py-4 dark:border-zinc-800 dark:bg-bg'>
-        <div className='flex items-center justify-center px-4 pb-4'>
-          <p className='flex-grow text-center font-sans text-lg font-bold tracking-wide text-bord dark:text-gray-200'>
-            {title}
-          </p>
-          <button
-            onClick={callbackFnOnClose}
-            className='text-bord dark:text-main'>
-            <AiFillCloseCircle size={18}></AiFillCloseCircle>
-          </button>
-        </div>
-        <div className=''>
-          <p className='text-center text-black dark:text-muted'>{desc}</p>
-        </div>
-      </div>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'>
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'>
+                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-bord'>
+                  <Dialog.Title
+                    as='h3'
+                    className='text-lg font-medium leading-6 text-gray-900'>
+                    {title}
+                  </Dialog.Title>
+                  <div className='mt-2'>
+                    <p className='text-sm text-gray-500'>{desc} </p>
+                  </div>
+
+                  <div className='mt-4'>
+                    <button
+                      type='button'
+                      className='btn w-fit px-3'
+                      onClick={closeModal}>
+                      Close
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 };
+
 export default InfoAlertBox;
